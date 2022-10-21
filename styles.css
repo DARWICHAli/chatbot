@@ -370,7 +370,8 @@ H1 {
 }
 
 .myTimetable THEAD{
-  color: #FFFFFF;
+  color: #000000;
+  background-color: gray;
 }
 
 .myTimetable TBODY {
