@@ -1,5 +1,5 @@
 html, body {
-  background: #efefef;
+  /*background: #efefef;*/
   height:100%;
 }
 #center-text {
@@ -355,7 +355,7 @@ body {
 BODY {
   font-family: Trebuchet MS;
   margin:20px;
-  background-color: #600040;
+  /*background-color: #600040;*/
 }
 
 H1 {
@@ -377,6 +377,7 @@ H1 {
   background-color: #AAAAFF;
 }
 
+
 .myTimetable TD {
   border: 1px solid black;
   padding: 6px;
@@ -392,13 +393,13 @@ H1 {
 .reserved {
   font-size: 12pt;
   margin-bottom:4px;
-  background-color: #808080 !important
+  background-color: #808080;
 
 }
 
 .notreserved {
   font-size: 12pt;
   margin-bottom:4px;
-  /*background-color: #FF0000 !important*/
+  background-color: #FF0000;
 
 }
