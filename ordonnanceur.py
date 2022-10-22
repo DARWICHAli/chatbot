@@ -58,7 +58,7 @@ class ordonnanceur(object):
                     return date1 ,date2
                 else :
                     print('il y a plus de creneau ')
-                    break
+                    return 0,0
         print('il y a plus de creneau ')
         return 0,0
     # block a specific date
@@ -75,13 +75,13 @@ class ordonnanceur(object):
 
 def main():
 
-    x = ordonnanceur()
-    date1 ,date2 =x.add_creneau(60*24)
-    print(date1,date2)
-    x.bloque(1)
-    x.bloque(2)
-    date1 ,date2 =x.add_creneau(120)
-    print(date1,date2)
+    # x = ordonnanceur()
+    # date1 ,date2 =x.add_creneau(60*24)
+    # print(date1,date2)
+    # x.bloque(1)
+    # x.bloque(2)
+    # date1 ,date2 =x.add_creneau(120)
+    # print(x.add_creneau(10080))
     # date1 ,date2 =x.add_creneau(60)
     # print(date1,date2)
     # date1 ,date2 =x.add_creneau(60*24)
