@@ -5,19 +5,19 @@ def hour_calc(i):
     min= 0
     min_of_day = 60 *24
     if(i < min_of_day):
-        date = "Monday"
+        date = "Mon"
     elif(i < min_of_day*2):
-        date = "Tuesday"
+        date = "Tue"
     elif(i < min_of_day*3):
-        date = "Wednesday"
+        date = "Wed"
     elif(i < min_of_day*4):
-        date = "Thursday"
+        date = "Thu"
     elif(i < min_of_day*5):
-        date = "Friday"
+        date = "Fri"
     elif(i < min_of_day*6):
-        date = "Saturday"
+        date = "Sat"
     else:
-        date = "Sunday"
+        date = "Sun"
 
     tmp = i%min_of_day
     min = tmp%60
@@ -45,6 +45,7 @@ class ordonnanceur(object):
             print("error on number of pages")
             return
         for i in range(self.length_array):
+            #print(i,self.array[i])
             if(self.array[i] == 0):
                 if(nb_pages+i <= self.length_array):
                     print('reserving time')
@@ -54,31 +55,40 @@ class ordonnanceur(object):
                         self.array[h] = 1
 
                     date2 = hour_calc(h)
-                    # print(date1)
-                    # print(date2)
                     return date1 ,date2
-                    break
                 else :
                     print('il y a plus de creneau ')
                     break
-            else :
-                print('il y a plus de creneau ')
-                break
-
+        print('il y a plus de creneau ')
+        return 0,0
     # block a specific date
-    def bloque(self,jour):
-        len_day = self.length_array /7
-        self.array = [-1 for i in range(len_day*jour,len_day*jour+1)]
 
+    def bloque(self,jour):
+        len_day = int(self.length_array /7)
+        #self.array = [-1 for i in range(len_day*jour,len_day*jour+1)]
+
+        for h in range(len_day*jour,len_day*(jour+1)) :
+            self.array[h] = -1
+
+        #print(self.array)
 
 
 def main():
 
     x = ordonnanceur()
-    date1 ,date2 =x.add_creneau(456)
+    date1 ,date2 =x.add_creneau(60*24)
     print(date1,date2)
+    x.bloque(1)
+    x.bloque(2)
+    date1 ,date2 =x.add_creneau(120)
+    print(date1,date2)
+    # date1 ,date2 =x.add_creneau(60)
+    # print(date1,date2)
+    # date1 ,date2 =x.add_creneau(60*24)
+    # print(date1,date2)
+    # date1 ,date2 =x.add_creneau(10080)
+    # print(date1,date2)
     pass
-
 
 
 
