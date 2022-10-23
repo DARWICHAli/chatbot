@@ -286,7 +286,11 @@
                 {
                     start = true;
                 }
-                if ((start = true) && day != ed)
+                else if (day == ed)
+                {
+                    break;
+                }
+                else if (start)
                 {
                     add_lock(day, ['0','0'], ['23','59']);
                 }
@@ -320,7 +324,7 @@
         const diff_pr = (diff/60)*100;
 
         lock.className = "event event" + LOCK_ID.toString()+ " calendar2"
-        lock.textContent = "Machine Locked"
+        lock.textContent = "Printer Locked"
         
         if (start_h == 0)
         {
@@ -338,24 +342,23 @@
             + "top:calc(" + minute_per.toString() + "% - 1px);\n"
             + "position:relative;\n"
         }
-        lock.id = "lock-id-" + PJ_ID.toString();
+        lock.id = "lock-id-" + LOCK_ID.toString();
 
         var click_react = function(evt)
         {
-            console.log("Entering");
-            req = document.getElementById("lock-zoom-id");
+            req = document.getElementById("zoom-id");
             if ( req == null)
             {
                 var lock_zoom = document.createElement("div");
-                lock_zoom.id = "lock-zoom-id";
+                lock_zoom.id = "zoom-id";
                 lock_zoom.className = "event event_z calendar1";
-                lock_zoom.textContent = "Zoom IN: Machine Locked Duration : " + diff + " minutes in " + day;
+                lock_zoom.textContent = "Zoom IN: Printer Locked Duration : " + diff + " minutes in " + day;
                 document.getElementById("container_id").append(lock_zoom);
                 evt.stopPropagation();
             }
             else
             {
-                lock_zoom.textContent = "Zoom IN: Machine Locked Duration : " + diff + " minutes in " + day;
+                req.textContent = "Zoom IN: Printer Locked Duration : " + diff + " minutes in " + day;
                 evt.stopPropagation();
             }
 
@@ -364,7 +367,7 @@
         document.getElementById("content-id").append(lock);
         document.getElementById(lock.id).addEventListener('click', click_react);
         document.getElementById("container_id").addEventListener('click', function(){
-            req = document.getElementById("lock-zoom-id");
+            req = document.getElementById("zoom-id");
             if (req != null)
             {
                 document.getElementById("container_id").removeChild(req);
@@ -413,8 +416,6 @@
                 }
                 else if (start)
                 {
-                    console.log(day);
-                    console.log(start);
                     add_printing_job(day, ['0','0'], ['23','59'], 2);
                 }
 
@@ -480,12 +481,11 @@
 
         var click_react = function(evt)
         {
-            console.log("Entering");
-            req = document.getElementById("pj-zoom-id");
+            req = document.getElementById("zoom-id");
             if ( req == null)
             {
                 var pj_zoom = document.createElement("div");
-                pj_zoom.id = "pj-zoom-id";
+                pj_zoom.id = "zoom-id";
                 pj_zoom.className = "event event_z calendar1";
                 pj_zoom.textContent = "Zoom IN: Printing Job N°" + local_pj_id.toString() + " Duration : " + diff + " minutes in " + day;
                 document.getElementById("container_id").append(pj_zoom);
@@ -502,7 +502,7 @@
         document.getElementById("content-id").append(pj);
         document.getElementById(pj.id).addEventListener('click', click_react);
         document.getElementById("container_id").addEventListener('click', function(){
-            req = document.getElementById("pj-zoom-id");
+            req = document.getElementById("zoom-id");
             if (req != null)
             {
                 document.getElementById("container_id").removeChild(req);

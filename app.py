@@ -2,12 +2,28 @@ from flask import Flask, render_template, request
 import json
 from ordonnanceur import Ordonnanceur
 from random import randrange
+import datetime
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
 
 app = Flask(__name__)
 
 ordo = None
 hist = None
 lock_hist = None
+
+def check_week_clear():
+    global lock_hist
+    global ordo
+    global hist
+    now = datetime.datetime.now()
+    print("Checking ...")
+    if now.weekday() == 1:
+        ordo = Ordonnanceur()
+        hist = []
+        lock_hist = []
+        print("Done ! Schedule Reset.")
+    return 0
 
 @app.before_first_request
 def start():
@@ -18,12 +34,15 @@ def start():
     hist = []
     lock_hist = []
 
+
 @app.route('/', methods = ['POST', 'GET'])
 def index():
     global lock_hist
+    global ordo
     if request.method == 'POST':
         sdt = [request.form.get('sd'), request.form.get('st')]
         edt = [request.form.get('ed'), request.form.get('et')]
+        ordo.bloque_hour(sdt, edt)
         lock_hist.append([sdt, edt])
     return render_template('index.html')
 
@@ -64,4 +83,13 @@ def lock():
     return json.dumps(response)
 
 if __name__ == '__main__':
+    scheduler = BackgroundScheduler(daemon = True)
+    scheduler.start()
+    trigger = CronTrigger(
+        year="*", month="*", day="*", hour="0", minute="1"
+    )
+    scheduler.add_job(
+        check_week_clear,
+        trigger=trigger
+    )
     app.run(debug=True)
