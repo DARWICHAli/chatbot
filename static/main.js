@@ -6,7 +6,7 @@ $(function() {
     if(msg.trim() == ''){
       return false;
     }
-    generate_message(msg, 'self');
+    generate_message_self(msg, 'self');
     var buttons = [
         {
           name: 'Existing User',
@@ -17,13 +17,35 @@ $(function() {
           value: 'new'
         }
       ];
-    setTimeout(function() {      
-      generate_message(msg, 'user');  
-    }, 1000)
+    $.post( "/postmethod", {
+      javascript_data: msg 
+    })
+    .done(function(data) {
+      data = JSON.parse(data);
+      generate_message_user(data["flask_data"], 'user');
+    });
     
   })
   
-  function generate_message(msg, type) {
+  function generate_message_user(msg, type) {
+    INDEX++;
+    var str="";
+    str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+"\">";
+    str += "          <span class=\"msg-avatar\">";
+    str += "            <img src=\"./static/images/bot.png\">";
+    str += "          <\/span>";
+    str += "          <div class=\"cm-msg-text\">";
+    str += msg;
+    str += "          <\/div>";
+    str += "        <\/div>";
+    $(".chat-logs").append(str);
+    $("#cm-msg-"+INDEX).hide().fadeIn(300);
+    if(type == 'self'){
+     $("#chat-input").val(''); 
+    }    
+    $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);    
+  }  
+  function generate_message_self(msg, type) {
     INDEX++;
     var str="";
     str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+"\">";
@@ -40,7 +62,7 @@ $(function() {
      $("#chat-input").val(''); 
     }    
     $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);    
-  }  
+  }
   
   function generate_button_message(msg, buttons){    
     /* Buttons should be object array 
