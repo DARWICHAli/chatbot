@@ -18,7 +18,7 @@ def check_week_clear():
     global hist
     now = datetime.datetime.now()
     print("Checking ...")
-    if now.weekday() == 1:
+    if now.weekday() == 0:
         ordo = Ordonnanceur()
         hist = []
         lock_hist = []
