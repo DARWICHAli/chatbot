@@ -1,4 +1,3 @@
-
 def hour_calc(i):
     date = 0
     hour= 0
@@ -27,8 +26,25 @@ def hour_calc(i):
     return [date,res]
 
 
-class ordonnanceur(object):
-    """docstring for ordonnanceur."""
+def get_day(date1):
+    if(date1[0] == "Mon"):
+        return 0
+    elif(date1[0] == "Tue"):
+        return 1
+    elif(date1[0] == "Wed"):
+        return 2
+    elif(date1[0] == "Thu"):
+        return 3
+    elif(date1[0] == "Fri"):
+        return 4
+    elif(date1[0] == "Sat"):
+        return 5
+    else: #Sun
+        return 6
+
+
+class Ordonnanceur(object):
+    """docstring for Ordonnanceur."""
 
     length_array = 10080 # 7 jour * 24h * 60 mins
     array = [length_array] # 0 creneau libre  sinon 1  -1 si date block
@@ -37,30 +53,35 @@ class ordonnanceur(object):
 
 
     def __init__(self):
-        super(ordonnanceur, self).__init__()
+        super(Ordonnanceur, self).__init__()
         self.array = [0 for i in range(self.length_array)]
 
     def add_creneau(self, nb_pages):
+        b1 = 0
         if(nb_pages <= 0):
-            print("error on number of pages")
-            return
+            return [-1, "Error on number of pages"]
+        mins_took = int((nb_pages*self.vitesse_imprimmer)/60)
         for i in range(self.length_array):
-            #print(i,self.array[i])
             if(self.array[i] == 0):
-                if(nb_pages+i <= self.length_array):
+                if(mins_took+i <= self.length_array ):
+                    for h in range(i,mins_took+i): # on imprimme un fichier en entier
+                        if(self.array[h] != 0 ):
+                            b1=1
+                            break
+                    if(b1==1):
+                        b1=0
+                        continue
                     print('reserving time')
                     date1 = hour_calc(i)
-
-                    for h in range(i,(nb_pages*self.vitesse_imprimmer)+i) :
+                    for h in range(i,mins_took+i) :
                         self.array[h] = 1
 
                     date2 = hour_calc(h)
                     return date1 ,date2
                 else :
-                    print('il y a plus de creneau ')
-                    return 0,0
-        print('il y a plus de creneau ')
-        return 0,0
+                    print()
+                    return [-1, "No timeslot left for this week."]
+        return [-1, "No timeslot left for this week."]
     # block a specific date
 
     def bloque(self,jour):
@@ -70,18 +91,41 @@ class ordonnanceur(object):
         for h in range(len_day*jour,len_day*(jour+1)) :
             self.array[h] = -1
 
-        #print(self.array)
+    def bloque_hour(self,date1,date2):
+
+        jour1 = 0
+        jour2 = 0
+
+        hour_min1 = date1[1].split(":")
+        hour_min2 = date2[1].split(":")
+
+        hour1 = int(hour_min1[0])
+        min1 =  int(hour_min1[1])
+        hour2 = int(hour_min2[0])
+        min2 =  int(hour_min2[1])
+
+        jour1 = get_day(date1)
+        jour2 = get_day(date2)
+
+        len_day = int(self.length_array /7)
+
+        for h in range((len_day*jour1)+(hour1*60)+min1 ,(len_day*jour2)+(hour2*60)+min2 ) :
+            self.array[h] = -1
+
+
 
 
 def main():
 
-    # x = ordonnanceur()
-    # date1 ,date2 =x.add_creneau(60*24)
+    x = Ordonnanceur()
+    date1 ,date2 =x.add_creneau(43200)
+    x.bloque_hour(["Mon","12:00"],["Mon","13:50"])
     # print(date1,date2)
     # x.bloque(1)
     # x.bloque(2)
-    # date1 ,date2 =x.add_creneau(120)
-    # print(x.add_creneau(10080))
+    date1 ,date2 =x.add_creneau(60*60)
+    print(date1 ,date2 )
+
     # date1 ,date2 =x.add_creneau(60)
     # print(date1,date2)
     # date1 ,date2 =x.add_creneau(60*24)
