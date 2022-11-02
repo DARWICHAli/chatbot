@@ -17,8 +17,9 @@ $(function() {
           value: 'new'
         }
       ];
+    generate_message_user("Waiting for processing ...", 'user');
     $.post( "/postmethod", {
-      javascript_data: msg 
+      javascript_data: msg
     })
     .done(function(data) {
       data = JSON.parse(data);
