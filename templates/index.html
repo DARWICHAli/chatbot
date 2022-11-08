@@ -2,7 +2,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
-
+<script>String.prototype.hashCode = function() {
+  var hash = 0,
+    i, chr;
+  if (this.length === 0) return hash;
+  for (i = 0; i < this.length; i++) {
+    chr = this.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}</script>
 
 <head>
   <title>Chatbot Project | SDIA & SDSC</title>
@@ -11,7 +21,13 @@
     <h2>Printer ChatBot</h2>
     <p>This chatbot accepts both English and French instructions make sure to give the number of pages. The chatbot will send you the duration if your query is correct.</p>
     <button class="btn-calendar" onclick="window.location.href='/calendar'">Calendar</button>
-    <br><br><br>
+    <button class="btn-clear-calendar" onclick="
+    if (prompt('Enter Password : ').hashCode() == '825406597'){
+      window.location.href='/clear_calendar';alert('Calendar Cleared');
+    }
+    else {
+      alert('Wrong Password !');
+    }">Clear Calendar</button>
 
     <h2>Locking Printer</h2>
     <p>Please fill this form to lock the printer from the starting date time to ending date time.</p>
@@ -73,7 +89,6 @@
         </div>
     </div>
 </div>
-
 
 <script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='./jquery.min.js') }}"></script>
 <script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='./bootstrap.min.js') }}"></script>

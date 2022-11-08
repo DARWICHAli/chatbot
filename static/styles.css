@@ -15,8 +15,26 @@ html, body {
     position: relative;
     display: inline-block;
     color:white;
+    margin-top:0.3%;
 }
-.btn-calendar:hover{
+.btn-clear-calendar{
+  border-radius: 0%;
+  pointer-events: auto;
+  cursor: pointer;
+  background: #5A5EB9;
+  border: none;
+  padding: 1rem 3rem;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  position: relative;
+  display: inline-block;
+  color:white;
+  margin-top:0.5%;
+  margin-bottom:0.5%;
+}
+
+.btn-clear-calendar:hover, .btn-calendar:hover{
   background-color:#06c1ff;
 }
 

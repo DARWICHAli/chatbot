@@ -1,4 +1,4 @@
-def hour_calc(i):
+def hour_calc(i):  # sourcery skip: avoid-builtin-shadow
     date = 0
     hour= 0
     min= 0
@@ -21,7 +21,7 @@ def hour_calc(i):
     tmp = i%min_of_day
     min = tmp%60
     hour = tmp -min
-    hour = hour/60
+    hour /= 60
     res = "{}:{}".format(int(hour), int(min))
     return [date,res]
 
@@ -54,7 +54,7 @@ class Ordonnanceur(object):
 
     def __init__(self):
         super(Ordonnanceur, self).__init__()
-        self.array = [0 for i in range(self.length_array)]
+        self.array = [0 for _ in range(self.length_array)]
 
     def add_creneau(self, nb_pages):
         b1 = 0
@@ -62,8 +62,8 @@ class Ordonnanceur(object):
             return [-1, "Error on number of pages"]
         mins_took = int((nb_pages*self.vitesse_imprimmer)/60)
         for i in range(self.length_array):
-            if(self.array[i] == 0):
-                if(mins_took+i <= self.length_array ):
+            if (self.array[i] == 0):
+                if (mins_took+i <= self.length_array ):
                     for h in range(i,mins_took+i): # on imprimme un fichier en entier
                         if(self.array[h] != 0 ):
                             b1=1
@@ -73,12 +73,13 @@ class Ordonnanceur(object):
                         continue
                     print('reserving time')
                     date1 = hour_calc(i)
-                    for h in range(i,mins_took+i) :
+                    h = i
+                    for h in range(i, mins_took + i):
                         self.array[h] = 1
 
                     date2 = hour_calc(h)
                     return date1 ,date2
-                else :
+                else:
                     print()
                     return [-1, "No timeslot left for this week."]
         return [-1, "No timeslot left for this week."]
