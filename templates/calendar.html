@@ -1,0 +1,530 @@
+
+<style>
+    .back-circle {
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        background: #5A5EB9;
+        width: 80px;
+        height: 80px;  
+        border-radius: 50%;
+        border-style: none;
+        color: white;
+        font-family: inherit;
+        font-size: inherit;
+        cursor: pointer;
+    }
+    .back-circle:hover{
+        color:#000000;
+        background-color:#06c1ff;
+    }
+        * {
+    box-sizing: border-box;
+    }
+
+    body {
+    background: #fff;
+    }
+
+    .container {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 3em 3em auto;
+    position: absolute;
+    }
+
+    .title {
+    background: #217346;
+    text-align: center;
+    display: grid;
+    place-content: center;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    }
+
+    .days {
+    background: #f3f2f1;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    grid-template-columns: 3em 10px repeat(7, 1fr);
+    position: sticky;
+    top: 3em;
+    z-index: 10;
+    border-bottom: 2px solid #dadce0;
+    }
+
+    .day {
+    border-left: 1px solid #dadce0;
+    }
+
+    .content {
+    display: grid;
+    grid-template-columns: 3em 10px repeat(7, 1fr);
+    grid-template-rows: repeat(24, 3em);
+    }
+
+    .time {
+    grid-column: 1;
+    text-align: right;
+    align-self: end;
+    font-size: 80%;
+    position: relative;
+    bottom: -1ex;
+    color: #70757a;
+    padding-right: 2px;
+    }
+
+    .col {
+    border-right: 1px solid #dadce0;
+    grid-row: 1 / span 24;
+    grid-column: span 1;
+    }
+
+    .filler-col {
+    grid-row: 1 / -1;
+    grid-column: 2;
+    border-right: 1px solid #dadce0;
+    }
+
+    .row {
+    grid-column: 2 / -1;
+    border-bottom: 1px solid #dadce0;
+    }
+
+    .event {
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 80%;
+    color:white;
+    transition: transform .1s;
+    }
+
+    .weekend {
+    background-color: #f1f3f4;
+    }
+
+    .calendar1 {
+    background-color: #b9eb30;
+    border-color: #000101;
+    }
+
+    .calendar2 {
+    background-color: #bf0606;
+    border-color: #a82e2e;
+    }
+
+    .current-time {
+    grid-column: 7;
+    grid-row: 10;
+    border-top: 2px solid #ea4335;
+    position: relative;
+    top: calc(50% - 1px);
+    }
+
+    .circle {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #ea4335;
+    border-radius: 50%;
+    background: #ea4335;
+    position: relative;
+    top: -6px;
+    left: -6px;
+    }
+
+    .current {
+    font-weight: bold;
+    }
+    .event_z {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 25%;
+        height: auto;
+        font-size:large;
+        text-align: center;
+    }
+</style>
+<head>
+    <title>Chatbot Project | SDIA & SDSC | Calendar</title>
+  </head>
+
+
+<div id="container_id" class="container">
+    
+    <button class="back-circle" onclick="window.location.href='/'">Go Back</button>
+    <div id= "title_id" class="title"></div>
+    <div class="days">
+      <div class="filler"></div>
+      <div class="filler"></div>
+      <div id="day_1" class="day">Mon </div>
+      <div id="day_2" class="day">Tue </div>
+      <div id="day_3" class="day">Wed </div>
+      <div id="day_4" class="day">Thu </div>
+      <div id="day_5" class="day">Fri </div>
+      <div id="day_6" class="day">Sat </div>
+      <div id="day_7" class="day">Sun </div>
+    </div>
+    <div id="content-id" class="content">
+      <div class="time" style="grid-row:1">01:00</div>
+      <div class="time" style="grid-row:2">02:00</div>
+      <div class="time" style="grid-row:3">03:00</div>
+      <div class="time" style="grid-row:4">04:00</div>
+      <div class="time" style="grid-row:5">05:00</div>
+      <div class="time" style="grid-row:6">06:00</div>
+      <div class="time" style="grid-row:7">07:00</div>
+      <div class="time" style="grid-row:8">08:00</div>
+      <div class="time" style="grid-row:9">09:00</div>
+      <div class="time" style="grid-row:10">10:00</div>
+      <div class="time" style="grid-row:11">11:00</div>
+      <div class="time" style="grid-row:12">12:00</div>
+      <div class="time" style="grid-row:13">13:00</div>
+      <div class="time" style="grid-row:14">14:00</div>
+      <div class="time" style="grid-row:15">15:00</div>
+      <div class="time" style="grid-row:16">16:00</div>
+      <div class="time" style="grid-row:17">17:00</div>
+      <div class="time" style="grid-row:18">18:00</div>
+      <div class="time" style="grid-row:19">19:00</div>
+      <div class="time" style="grid-row:20">20:00</div>
+      <div class="time" style="grid-row:21">21:00</div>
+      <div class="time" style="grid-row:22">22:00</div>
+      <div class="time" style="grid-row:23">23:00</div>
+      <div class="filler-col"></div>
+      <div class="col" style="grid-column:3"></div>
+      <div class="col" style="grid-column:4"></div>
+      <div class="col" style="grid-column:5"></div>
+      <div class="col" style="grid-column:6"></div>
+      <div class="col" style="grid-column:7"></div>
+      <div class="col weekend" style="grid-column:8"></div>
+      <div class="col weekend" style="grid-column:9"></div>
+      <div class="row" style="grid-row:1"></div>
+      <div class="row" style="grid-row:2"></div>
+      <div class="row" style="grid-row:3"></div>
+      <div class="row" style="grid-row:4"></div>
+      <div class="row" style="grid-row:5"></div>
+      <div class="row" style="grid-row:6"></div>
+      <div class="row" style="grid-row:7"></div>
+      <div class="row" style="grid-row:8"></div>
+      <div class="row" style="grid-row:9"></div>
+      <div class="row" style="grid-row:10"></div>
+      <div class="row" style="grid-row:11"></div>
+      <div class="row" style="grid-row:12"></div>
+      <div class="row" style="grid-row:13"></div>
+      <div class="row" style="grid-row:14"></div>
+      <div class="row" style="grid-row:15"></div>
+      <div class="row" style="grid-row:16"></div>
+      <div class="row" style="grid-row:17"></div>
+      <div class="row" style="grid-row:18"></div>
+      <div class="row" style="grid-row:19"></div>
+      <div class="row" style="grid-row:20"></div>
+      <div class="row" style="grid-row:21"></div>
+      <div class="row" style="grid-row:22"></div>
+      <div class="row" style="grid-row:23"></div>
+      <div id="curr-id" class="current-time">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+  <script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='./jquery.min.js') }}"></script>
+  <script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='./bootstrap.min.js') }}"></script>
+  <script>
+    var curr = new Date;
+    let PJ_ID = 1;
+    let LOCK_ID = 1;
+    curr = curr.toString();
+    const date_array = curr.split(" ");
+    const time_array = date_array[4].split(":");
+    const hour = time_array[0];
+    const minute_per = ((time_array[1]/60) + 1) * 100;
+
+    document.getElementById("title_id").textContent = "Today is : "+ curr;
+    var column = 0;
+    for (let i = 0; i < 7; i++) {
+        if (document.getElementById("day_" + (i + 1)).textContent == date_array[0] + " ")
+        {
+            document.getElementById("day_" + (i + 1)).className = "date current";
+            column = i + 3;
+        }
+    }
+    document.getElementById("curr-id").style = "grid-column:" 
+    + column.toString() + ";\n" + "grid-row:" + hour.toString() + ";\n" 
+    + "top:calc(" + minute_per.toString() + "% - 1px);\n";
+    $.post("/lock", {
+        lock: "True"
+    })
+    .done(function(data)
+    {
+        data = JSON.parse(data);
+        console.log(data["lock"]);
+        for (let i=0; i < data["lock"].length; i++)
+        {
+            add_lock_all(data["lock"][i][0][0], data["lock"][i][0][1], data["lock"][i][1][0], data["lock"][i][1][1]);
+        } 
+    });
+    function add_lock_all(sd, st, ed, et)
+    {
+        st = st.split(':');
+        et = et.split(':');
+        if (sd == ed)
+        {
+            add_lock(sd, st, et);
+        }
+        else
+        {
+            add_lock(sd, st, ['23','59']);
+            var start = false;
+            for (let i = 0; i < 7; i++) {
+                let day = document.getElementById("day_" + (i + 1)).textContent.split(" ")[0];
+                if (day == sd)
+                {
+                    start = true;
+                }
+                else if (day == ed)
+                {
+                    break;
+                }
+                else if (start)
+                {
+                    add_lock(day, ['0','0'], ['23','59']);
+                }
+            }
+            add_lock(ed, ['0','0'], et);
+        }
+    }
+    
+    function add_lock(day, start , end)
+    {
+        var column = 0;
+        for (let i = 0; i < 7; i++) {
+            if (document.getElementById("day_" + (i + 1)).textContent.split(" ")[0] == day)
+            {
+                column = i + 3;
+            }
+        }
+        var start_h = parseInt(start[0]);
+        var start_m = parseInt(start[1]);
+        var end_h = parseInt(end[0]);
+        var end_m = parseInt(end[1]);
+        
+        assert(start_h <= end_h, "Starting hour should be always be <= to Ending Hour" + " \nStarting :" + start + " \nEnding :" + end);
+        assert(column != 0, "Day should follow this format : Mon, Tue, etc ...");
+
+
+        var lock = document.createElement("div");
+        
+        const diff = (end_h - start_h)*60 + end_m - start_m;
+        const minute_per = ((start_m/60 ) * 100);
+        const diff_pr = (diff/60)*100;
+
+        lock.className = "event event" + LOCK_ID.toString()+ " calendar2"
+        lock.textContent = "Printer Locked"
+        
+        if (start_h == 0)
+        {
+            lock.style = "grid-column:" + column.toString() + ";\n" 
+            + "grid-row:1;\n" 
+            + "height:calc(" + diff_pr.toString() + "% - 1px);\n"
+            + "top:calc(" + minute_per.toString() + "% - 1px);\n"
+            + "position:relative;\n"
+        }
+        else
+        {
+            lock.style = "grid-column:" + column.toString() + ";\n" 
+            + "grid-row:" + (start_h + 1).toString() + ";\n" 
+            + "height:calc(" + diff_pr.toString() + "% - 1px);\n"
+            + "top:calc(" + minute_per.toString() + "% - 1px);\n"
+            + "position:relative;\n"
+        }
+        lock.id = "lock-id-" + LOCK_ID.toString();
+
+        var click_react = function(evt)
+        {
+            req = document.getElementById("zoom-id");
+            if ( req == null)
+            {
+                var lock_zoom = document.createElement("div");
+                lock_zoom.id = "zoom-id";
+                lock_zoom.className = "event event_z calendar1";
+                lock_zoom.textContent = "Zoom IN: Printer Locked Duration : " + diff + " minutes in " + day;
+                document.getElementById("container_id").append(lock_zoom);
+                evt.stopPropagation();
+            }
+            else
+            {
+                req.textContent = "Zoom IN: Printer Locked Duration : " + diff + " minutes in " + day;
+                evt.stopPropagation();
+            }
+
+        }
+        
+        document.getElementById("content-id").append(lock);
+        document.getElementById(lock.id).addEventListener('click', click_react);
+        document.getElementById("container_id").addEventListener('click', function(){
+            req = document.getElementById("zoom-id");
+            if (req != null)
+            {
+                document.getElementById("container_id").removeChild(req);
+                
+            }
+        });
+        LOCK_ID += 1;
+    }
+    
+    
+    
+    $.post( "/ready", {
+      ready: "True" 
+    })
+    .done(function(data) {
+      data = JSON.parse(data);
+      console.log(data["ready"]);
+      for (let i=0; i < data["ready"].length; i++)
+      {
+        add_printing_job_all(data["ready"][i][0][0], data["ready"][i][0][1], data["ready"][i][1][0], data["ready"][i][1][1]);
+      }  
+    });
+
+
+    function add_printing_job_all(sd, st, ed, et)
+    {
+        st = st.split(':');
+        et = et.split(':');
+        if (sd == ed)
+        {
+            add_printing_job(sd, st, et, 0);
+        }
+        else
+        {
+            add_printing_job(sd, st, ['23','59'], 1);
+            var start = false;
+            for (let i = 0; i < 7; i++) {
+                let day = document.getElementById("day_" + (i + 1)).textContent.split(" ")[0];
+                if (day == sd)
+                {
+                    start = true;
+                }
+                else if (day == ed)
+                {
+                    break;
+                }
+                else if (start)
+                {
+                    add_printing_job(day, ['0','0'], ['23','59'], 2);
+                }
+
+            }
+            add_printing_job(ed, ['0','0'], et, 2);
+        }
+    }
+    function add_printing_job(day, start , end, same)
+    {
+        var column = 0;
+        for (let i = 0; i < 7; i++) {
+            if (document.getElementById("day_" + (i + 1)).textContent.split(" ")[0] == day)
+            {
+                column = i + 3;
+            }
+        }
+        var start_h = parseInt(start[0]);
+        var start_m = parseInt(start[1]);
+        var end_h = parseInt(end[0]);
+        var end_m = parseInt(end[1]);
+        
+        assert(start_h <= end_h, "Starting hour should be always be <= to Ending Hour" + " \nStarting :" + start + " \nEnding :" + end);
+        assert(column != 0, "Day should follow this format : Mon, Tue, etc ...");
+
+
+        var pj = document.createElement("div");
+        
+        const diff = (end_h - start_h)*60 + end_m - start_m;
+        const minute_per = ((start_m/60 ) * 100);
+        const diff_pr = (diff/60)*100;
+
+        pj.className = "event event" + PJ_ID.toString()+ " calendar1"
+        var local_pj_id = PJ_ID;
+        if(same == 2)
+        {
+            local_pj_id = PJ_ID - 1;
+            pj.textContent = "Printing Document ID N°" + local_pj_id.toString();
+        }
+        else
+        {
+            pj.textContent = "Printing Document ID N°" + local_pj_id.toString();
+        }
+        
+        if (start_h == 0)
+        {
+            pj.style = "grid-column:" + column.toString() + ";\n" 
+            + "grid-row:1;\n" 
+            + "height:calc(" + diff_pr.toString() + "% - 1px);\n"
+            + "top:calc(" + minute_per.toString() + "% - 1px);\n"
+            + "position:relative;\n"
+            + "background-color: rgb(0," + random_green(same) + ",0);\n";
+        }
+        else
+        {
+            pj.style = "grid-column:" + column.toString() + ";\n" 
+            + "grid-row:" + (start_h + 1).toString() + ";\n" 
+            + "height:calc(" + diff_pr.toString() + "% - 1px);\n"
+            + "top:calc(" + minute_per.toString() + "% - 1px);\n"
+            + "position:relative;\n"
+            + "background-color: rgb(0," + random_green(same) + ",0);\n";
+        }
+        pj.id = "pj-id-" + PJ_ID.toString();
+
+        var click_react = function(evt)
+        {
+            req = document.getElementById("zoom-id");
+            if ( req == null)
+            {
+                var pj_zoom = document.createElement("div");
+                pj_zoom.id = "zoom-id";
+                pj_zoom.className = "event event_z calendar1";
+                pj_zoom.textContent = "Zoom IN: Printing Job N°" + local_pj_id.toString() + " Duration : " + diff + " minutes in " + day;
+                document.getElementById("container_id").append(pj_zoom);
+                evt.stopPropagation();
+            }
+            else
+            {
+                req.textContent = "Zoom IN: Printing Job N°" + local_pj_id.toString() + " Duration : " + diff + " minutes in " + day;
+                evt.stopPropagation();
+            }
+
+        }
+        
+        document.getElementById("content-id").append(pj);
+        document.getElementById(pj.id).addEventListener('click', click_react);
+        document.getElementById("container_id").addEventListener('click', function(){
+            req = document.getElementById("zoom-id");
+            if (req != null)
+            {
+                document.getElementById("container_id").removeChild(req);
+                
+            }
+        });
+        PJ_ID += 1;
+    }
+
+    function assert(condition, message) {
+        if (!condition) {
+            throw new Error(message || "Assertion failed");
+        }
+    }
+    function random_green(flag) {
+        var max = 210;
+        var min = 100;
+        var green = max;
+        if (flag == 0)
+        {
+            green = Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        return green;
+    }
+</script>
