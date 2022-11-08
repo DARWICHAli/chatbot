@@ -2,7 +2,7 @@
 
 
 echo Downloading requirements
-#pip install -r requirements.txt
+pip install -r requirements.txt
 echo Done
 
 
@@ -17,7 +17,7 @@ cd model
 
 
 echo Downloading Model-classification
-#wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1QAbnIvz7OgZnejdUfDgOhJ5izJYqvA_y' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1QAbnIvz7OgZnejdUfDgOhJ5izJYqvA_y" -O model-classification.zip && rm -rf /tmp/cookies.txt
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1QAbnIvz7OgZnejdUfDgOhJ5izJYqvA_y' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1QAbnIvz7OgZnejdUfDgOhJ5izJYqvA_y" -O model-classification.zip && rm -rf /tmp/cookies.txt
 echo Done
 
 
