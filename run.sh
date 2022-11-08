@@ -42,4 +42,4 @@ cd ../../
 pwd
 
 
-python3 app.py
+python app.py
